@@ -11,7 +11,7 @@
 `npm run dev` 
 <br>
 
-convert env.txt to .env
+uploaded .env as well
 
 **login** :<br>
 *User* : prerna@gmail.com, kartik@gmail.com ,password:123 :localhost/5173
