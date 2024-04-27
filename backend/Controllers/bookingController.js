@@ -8,16 +8,7 @@ export const getCheckoutSession = async (req, res) => {
         const doctor = await Doctor.findById(req.params.doctorId)
         const user = await User.findById(req.userId)
         const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
-        const   customer=stripe.Customer.create(
-            email=request.POST["email"],
-            name=request.POST["nickname"],
-            source=request.POST["stripeToken"],
-            )
-            customer=stripe.Customer.modify(
-                customer.id,
-                address={"city":"mumbai","country":"india","line1":"unr","line2":"thane","postal_code":"421005","state":"maharashtra"},
-            )
-        
+
         const session = await stripe.checkout.sessions.create(
             {
                 payment_method_types: ['card'],
@@ -39,13 +30,7 @@ export const getCheckoutSession = async (req, res) => {
                     },
                     quantity:1
                 }],
-                billing_address_collection: 'auto',
-                shipping_address_collection: {
-                     // Collect shipping address only for India
-                },
-                metadata: {
-                    customer_name: user.name,
-                }
+               
                 
             }
         )
