@@ -1,6 +1,5 @@
 const upload_preset = import.meta.env.VITE_UPLOAD_PRESET
 const cloud_name = import.meta.env.VITE_CLOUD_NAME
-import {Cloudinary} from "@cloudinary/url-gen";
 const  uploadImageToCloudinary = async file => {
     
     const uploadData = new FormData()

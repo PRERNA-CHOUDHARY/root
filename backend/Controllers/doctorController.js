@@ -26,11 +26,10 @@ export const deleteDoctor = async (req, res) => {
 export const getSingleDoctor = async (req, res) => {
     const id = req.params.id
     try {
-        const doctor = await Doctor.findById(id).populate('reviews').select("-password");
+        const doctor = await Doctor.findById(id).select("-password"); // Removed reviews for some time.
         res.status(200).json({ sucess: true, message: 'Doctor Found',data:doctor})
     } catch {
         res.status(404).json({ sucess: false, message: 'No Doctor found' })
-
     }
 }
 export const getAllDoctor = async (req, res) => {

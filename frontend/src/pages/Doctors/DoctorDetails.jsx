@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import starIcon from "../../assets/images/star.png";
+import { useState } from "react";
+import starIcon from "../../assets/images/Star.png";
 import DoctorAbout from "./DoctorAbout";
 import Feedback from "./Feedback";
 import SidePanel from "./SidePanel";
@@ -8,7 +8,6 @@ import useFetchData from './../../hooks/FetchData';
 import Loader from '../../components/Loader/Loading';
 import Error from '../../components/Error/Error';
 import { useParams } from "react-router-dom";
-import { toAnimated } from "@cloudinary/url-gen/actions/transcode";
 const DoctorDetails = () => {
   
   const [tab, setTab] = useState("about");
@@ -18,12 +17,10 @@ const DoctorDetails = () => {
 
   const {
     name,
-    phone,
     bio,
     about,
     averageRating,
     totalRating,
-    gender,
    specialization,
     ticketPrice,
     qualifications,
