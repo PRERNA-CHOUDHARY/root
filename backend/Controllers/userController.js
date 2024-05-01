@@ -67,8 +67,10 @@ export const getUserProfile = async(req, res) => {
 
 export const getMyAppointments = async(req, res) => {
     try {
-        const bookings = await Booking.find({user:req.userId})
-        const doctorId = bookings.map(el => el.doctor.id)
+        const bookings = await Booking.find({user:req.userId}).populate('doctor')
+        const doctorId = bookings.map(el => {
+            return el.doctor._id
+        })
         const doctors = await Doctor.find({_id: {$in:doctorId}}).select('-password')
         res.status(200).json({success:true, message:"Appointments being fetched", data:doctors})
     } catch (err) {
