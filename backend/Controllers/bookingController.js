@@ -12,13 +12,13 @@ export const getCheckoutSession = async (req, res) => {
         const stripeCustomer = await stripe.customers.create({
             email: user?.email || "kartik@gmail.com",
             name: user?.name || "Default User",
-            address: {
-                line1: user?.address?.line1 || "Default Address Line 1",
-                city: user?.address?.city || "Queensland",
-                state: user?.address?.state || "Queensland",
-                country: 'IN',
-                postal_code: user?.address?.postal_code || "4650"
-            }
+            // address: {
+            //     line1: user?.address?.line1 || "Default Address Line 1",
+            //     city: user?.address?.city || "Queensland",
+            //     state: user?.address?.state || "Queensland",
+            //     country: 'IN',
+            //     postal_code: user?.address?.postal_code || "4650"
+            // }
         });
 
         const session = await stripe.checkout.sessions.create({
