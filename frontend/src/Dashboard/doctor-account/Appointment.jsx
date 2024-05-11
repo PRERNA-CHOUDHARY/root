@@ -40,21 +40,16 @@ const Appointment = ({ appointments }) => {
                 scope="row"
                 className="flex items-center px-6  py-4 text-gray-900 whitespace-nowrap"
               >
-                <img
-                  src={item?.user?.photo}
-                  className="w-10 h-10 rounded-full"
-                  alt=""
-                />
                 <div className="pl-3">
                   <div className="text-base font-semibold">
-                    {item?.user?.name}
+                    {item?.user?.name || "Purnita"}
                   </div>
                   <div className="text-normal text-gray-500">
-                    {item?.user?.email}
+                    {item?.user?.email || "purnita@gmail.com"}
                   </div>
                 </div>
               </th>
-              <td className="px-6 py-4">{item?.user?.gender}</td>
+              <td className="px-6 py-4">{item?.user?.gender || "female"}</td>
               <td className="px-6 py-4">
                 {item?.isPaid && (
                   <div className="flex items-center">
