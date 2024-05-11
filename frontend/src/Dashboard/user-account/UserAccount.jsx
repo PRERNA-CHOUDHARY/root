@@ -1,19 +1,34 @@
+/**
+ * @description: This file contains the user account component which is used to display the user's profile and booking details.
+ */
 
-import React, { useState } from "react";
-import userImg from "../../assets/images/doctor-img01.png";
-import { useContext } from "react";
+// Import the necessary modules.
+import { useState, useContext } from "react";
+
+// Import the necessary contexts.
 import { AuthContext } from "../../Context/AuthContext";
+
+// Import the custom hooks.
+import useGetProfile from "../../hooks/FetchData";
+
+// Import the utility functions.
+import { BASE_URL } from "../../Utils/config.js";
+
+// Import the necessary components.
 import MyBooking from "./MyBooking";
 import ProfileSetting from "./ProfileSetting";
-import useGetProfile from "../../hooks/FetchData";
-import { BASE_URL } from "../../Utils/config.js";
 import Loading from "../../components/Loader/Loading.jsx";
 import Error from "../../components/Error/Error";
 
+// Define the UserAccount functional component.
 const UserAccount = () => {
+  // Destructure the dispatch method from the AuthContext.
   const { dispatch } = useContext(AuthContext);
+
+  // Define the state variables.
   const [activeTab, setActiveTab] = useState("bookings");
 
+  // Fetch the user data from the server.
   const {
     data: userData,
     loading,
@@ -21,6 +36,7 @@ const UserAccount = () => {
   } = useGetProfile(`${BASE_URL}/users/profile/me`);
   console.log("userdata", userData);
 
+  // Define the function to handle the logout.
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
   };

@@ -1,16 +1,26 @@
-import React, { useState, useEffect } from "react";
+/**
+ * @file Profile.jsx. It is used to show the profile of the doctor in the doctor account dashboard.
+ */
+
+// Import the necessary modules.
+import { useState, useEffect } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
-import uploadImageToCloudinary from './../../Utils/uploadCloudinary';
-import { BASE_URL, token } from './../../Utils/config';
-// import { toast } from react-toastify;
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
+import PropTypes from "prop-types";
+
+// Import the utility functions.
+import uploadImageToCloudinary from "./../../Utils/uploadCloudinary";
+import { BASE_URL, token } from "./../../Utils/config";
+
+// Define the Profile component.
 const Profile = ({ doctorData }) => {
+  // Define the state variables.
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
     bio: "",
     gender: "",
-   specialization: "",
+    specialization: "",
     ticketPrice: 0,
     qualifications: [
       { startingDate: "", endingDate: "", degree: "", university: "" },
@@ -22,7 +32,10 @@ const Profile = ({ doctorData }) => {
     about: "",
     photo: null,
   });
+
+  // Define the useEffect hook.
   useEffect(() => {
+    // Set the form data.
     setFormData({
       name: doctorData?.name,
       phone: doctorData?.phone,
@@ -35,65 +48,84 @@ const Profile = ({ doctorData }) => {
       timeSlots: doctorData?.timeSlots,
       about: doctorData?.about,
       photo: doctorData?.photo,
-    })
+    });
   }, [doctorData]);
 
+  // Define the handleInputChange function.
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleFileInputChange = async event => { 
+  // Define the handleFileInputChange function.
+  const handleFileInputChange = async (event) => {
+    // Get the file from the event.
     const file = event.target.files[0];
+
+    // Upload the image to cloudinary.
     const data = await uploadImageToCloudinary(file);
-    console.log(data);
-    setFormData({...formData,photo:data.url})
+    setFormData({ ...formData, photo: data.url });
   };
-  
+
+  // Define the updateProfileHandler function.
   const updateProfileHandler = async (e) => {
     e.preventDefault();
     try {
+      // Fetch the data from the server.
       const res = await fetch(`${BASE_URL}/doctors/${doctorData._id}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'content-type': 'application/json',
-          Authorization:`Bearer ${token}`
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        body:JSON.stringify(formData)
-      })
-      const result = await res.json()
-      if (!res.ok)
-      {
+        body: JSON.stringify(formData),
+      });
+      const result = await res.json();
+
+      // Check if the response is not ok and throw an error.
+      if (!res.ok) {
         throw Error(result.message);
       }
-      toast.success(result.message)
-    }
-    catch (err) {
-      toast.error(err.message)
+      toast.success(result.message);
+    } catch (err) {
+      toast.error(err.message);
     }
   };
 
+  // Define the addItem function.
   const addItem = (key, item) => {
+    // Set the form data.
     setFormData((prevFormData) => ({
       ...prevFormData,
       [key]: [...prevFormData[key], item],
     }));
   };
+
+  // Define the handleResableInputChangeFunc function.
   const handleResableInputChangeFunc = (key, index, event) => {
+    // Destructure the name and value from the event.
     const { name, value } = event.target;
     setFormData((prevFormData) => {
+      // Update the items.
       const updateItems = [...prevFormData[key]];
       updateItems[index][name] = value;
       return { ...prevFormData, [key]: updateItems };
     });
   };
+
+  // Define the deleteItem function.
   const deleteItem = (key, index) => {
+    // Set the form data.
     setFormData((prevFormData) => ({
       ...prevFormData,
       [key]: prevFormData[key].filter((_, i) => i != index),
     }));
   };
+
+  // Define the addQualification function.
   const addQualification = (e) => {
     e.preventDefault();
+
+    // Add the item.
     addItem("qualifications", {
       startingDate: "",
       endingDate: "",
@@ -101,14 +133,19 @@ const Profile = ({ doctorData }) => {
       university: "",
     });
   };
+
+  // Define the handleQualificationChange function.
   const handleQualificationChange = (event, index) => {
     handleResableInputChangeFunc("qualifications", index, event);
   };
+
+  // Define the deleteQualification function.
   const deleteQualification = (e, index) => {
     e.preventDefault();
     deleteItem("qualifications", index);
   };
 
+  // Define the addExperience function.
   const addExperience = (e) => {
     e.preventDefault();
     addItem("experiences", {
@@ -118,25 +155,36 @@ const Profile = ({ doctorData }) => {
       hospital: "",
     });
   };
+
+  // Define the handleExperienceChange function.
   const handleExperienceChange = (event, index) => {
     handleResableInputChangeFunc("experiences", index, event);
   };
+
+  // Define the deleteExperience function.
   const deleteExperience = (e, index) => {
     e.preventDefault();
     deleteItem("experiences", index);
   };
 
+  // Define the addTimeSlot function.
   const addTimeSlot = (e) => {
     e.preventDefault();
+
+    // Add the item.
     addItem("timeSlots", {
       day: "",
       startingTime: "",
       endingTime: "",
     });
   };
+
+  // Define the handleTimeSlotChange function.
   const handleTimeSlotChange = (event, index) => {
     handleResableInputChangeFunc("timeSlots", index, event);
   };
+
+  // Define the deleteTimeSlot function.
   const deleteTimeSlot = (e, index) => {
     e.preventDefault();
     deleteItem("timeSlots", index);
@@ -307,12 +355,12 @@ const Profile = ({ doctorData }) => {
               </div>
             </div>
           ))}
-                <button
-                  onClick={addQualification}
-                  className="bg-pinkColor mt-4 ms-10 py-1 px-3 rounded text-white cursor-pointer "
-                >
-                  + Add Qualification
-                </button>
+          <button
+            onClick={addQualification}
+            className="bg-pinkColor mt-4 ms-10 py-1 px-3 rounded text-white cursor-pointer "
+          >
+            + Add Qualification
+          </button>
         </div>
         <div className="mb-5 mt-10">
           <p className="form__label font-semibold">Experiences*</p>
@@ -372,12 +420,12 @@ const Profile = ({ doctorData }) => {
               </div>
             </div>
           ))}
-              <button
-                onClick={addExperience}
-                className="bg-pinkColor ms-10 py-1 px-3 mt-4 rounded text-white cursor-pointer "
-              >
-                + Add Experience
-              </button>
+          <button
+            onClick={addExperience}
+            className="bg-pinkColor ms-10 py-1 px-3 mt-4 rounded text-white cursor-pointer "
+          >
+            + Add Experience
+          </button>
         </div>
 
         <div className="mb-5 mt-10">
@@ -399,7 +447,7 @@ const Profile = ({ doctorData }) => {
                       <option value="monday">Monday</option>
                       <option value="tuesday">Tuesday</option>
                       <option value="wednesday">Wednesday</option>
-                      <option value="thrusday">Thrusday</option>
+                      <option value="thursday">Thursday</option>
                       <option value="friday">Friday</option>
                       <option value="saturday">Saturday</option>
                       <option value="sunday">Sunday</option>
@@ -452,7 +500,6 @@ const Profile = ({ doctorData }) => {
             className=" form__input ms-4 border rounded border-solid border-pinkColor"
             value={formData.about}
             onChange={handleInputChange}
-            // cols={80}
             rows={5}
           ></textarea>
         </div>
@@ -499,6 +546,10 @@ const Profile = ({ doctorData }) => {
       </form>
     </div>
   );
+};
+
+Profile.propTypes = {
+  doctorData: PropTypes.object,
 };
 
 export default Profile;

@@ -1,21 +1,40 @@
-import React, { useState } from "react";
+/**
+ * @fileoverview Doctor account dashboard component. It is used to show the doctor's profile and appointments.
+ */
+
+// Import the necessary modules.
+import { useState } from "react";
+
+// Import the necessary components.
 import Tabs from "./Tabs";
 import Loading from "../../components/Loader/Loading";
 import Error from "../../components/Error/Error";
-import useGetProfile from "../../hooks/FetchData";
-import { BASE_URL } from "../../Utils/config";
-import starIcon from "../../assets/images/Star.png";
-import DoctorAbout from "../../pages/Doctors/DoctorAbout";
 import Profile from "./Profile";
 import Appointment from "./Appointment";
+
+// Import the custom hooks.
+import useGetProfile from "../../hooks/FetchData";
+
+// Import the utility functions.
+import { BASE_URL } from "../../Utils/config";
+
+// Import the star icon.
+import starIcon from "../../assets/images/Star.png";
+
+// Import the DoctorAbout pages.
+import DoctorAbout from "../../pages/Doctors/DoctorAbout";
+
+// Define the Dashboard component.
 const Dashboard = () => {
+  // Define the state variables.
   const { data, loading, error } = useGetProfile(
     `${BASE_URL}/doctors/profile/me`
   );
   const [tab, setTab] = useState("overview");
+
   return (
     <section>
-       {console.log(data)}
+      {console.log(data)}
       <div className="max-w-[1170px] px-5 mx-auto">
         {loading && !error && <Loading />}
 
@@ -43,12 +62,11 @@ const Dashboard = () => {
                         {" "}
                         <img src={data?.photo} alt="" className="w-full" />
                       </figure>
-                      <div >
+                      <div>
                         <span className="bg-fuchsia-50 text-irisBlueColor py-1 px-4 lg:py-2 lg:px-6 rounded text-[12px] leading-4 lg:text-[16px] lg:leading-6 font-semibold ">
-                          {data.specialization} 
-                         
+                          {data.specialization}
                         </span>
-                        <h3 className="text-[22px] font-bold tect-headingColor mt-3 leading-9 ">
+                        <h3 className="text-[22px] font-bold text-headingColor mt-3 leading-9 ">
                           {data.name}
                         </h3>
                         <div className="flex items-center gap-[6px] text-headingColor text-[14px] leading-5 lg:text-[16px] lg:leading-6 font-semibold ">
@@ -63,17 +81,18 @@ const Dashboard = () => {
                         </p>
                       </div>
                     </div>
-                      <DoctorAbout
-                        name={data.name}
-                        about={data.about}
-                        qualifications={data.qualifications}
-                        experiences={data.experiences}
-                      />
-                    </div>
-                
+                    <DoctorAbout
+                      name={data.name}
+                      about={data.about}
+                      qualifications={data.qualifications}
+                      experiences={data.experiences}
+                    />
+                  </div>
                 )}
-                {tab == "appointments" && <Appointment appointments={data.appointments} />}
-                {tab == "settings" && <Profile doctorData={data}/>}
+                {tab == "appointments" && (
+                  <Appointment appointments={data.appointments} />
+                )}
+                {tab == "settings" && <Profile doctorData={data} />}
               </div>
             </div>
           </div>
