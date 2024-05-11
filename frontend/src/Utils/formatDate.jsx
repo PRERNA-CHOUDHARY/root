@@ -1,7 +1,9 @@
-import React from 'react'
+/**
+ * Format date to a readable format.
+ */
 
 export const formatDate = (date, config) => {
-    const defaultOptions = { day: 'numeric', month: 'short', year: 'numeric' }
-    const options = config ? config : defaultOptions;
-    return new Date(date).toLocaleDateString("en-US", options);
-}
+  const defaultOptions = { day: "numeric", month: "short", year: "numeric" };
+  const options = config ? config : defaultOptions;
+  return new Date(date).toLocaleDateString("en-US", options);
+};
