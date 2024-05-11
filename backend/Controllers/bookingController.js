@@ -71,3 +71,32 @@ export const getCheckoutSession = async (req, res) => {
       .json({ success: false, message: "Error creating checkout session" });
   }
 };
+
+// Add a booking slot.
+export const addBookingSlot = async (req, res) => {
+  try {
+    // Find the doctor by id.
+    const doctor = await Doctor.findById(req.params.doctorId);
+
+    // Create a new booking slot.
+    const bookingSlot = new Booking({
+      doctor: doctor._id,
+      user: req.userId,
+      ticketPrice: doctor.ticketPrice || "600",
+      status: "approved",
+      isPaid: true,
+      mode: req.params.mode.toLowerCase() || "vc",
+    });
+
+    // Save the booking slot.
+    await bookingSlot.save();
+    res
+      .status(200)
+      .json({ success: true, message: "Successfully added booking slot" });
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .json({ success: false, message: "Error adding booking slot" });
+  }
+};

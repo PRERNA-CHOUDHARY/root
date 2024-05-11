@@ -3,8 +3,9 @@
  */
 
 // Importing the necessary modules.
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 // Importing the components.
 import DoctorAbout from "./DoctorAbout";
@@ -17,7 +18,7 @@ import Error from "../../components/Error/Error";
 import starIcon from "../../assets/images/Star.png";
 
 // Importing the utility functions.
-import { BASE_URL } from "../../Utils/config";
+import { BASE_URL, token } from "../../Utils/config";
 
 // Importing the custom hooks.
 import useFetchData from "./../../hooks/FetchData";
@@ -27,6 +28,10 @@ const DoctorDetails = () => {
   // Defining the state variables.
   const [tab, setTab] = useState("about");
   const { id } = useParams();
+  const [timeSlotsFetched, setTimeSlotsFetched] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
+  const [communicationMode, setCommunicationMode] = useState("");
 
   // Fetching the data from the server.
   const {
@@ -49,6 +54,79 @@ const DoctorDetails = () => {
     photo,
     reviews,
   } = doctor;
+
+  // Fetching the time slots.
+  useEffect(() => {
+    if (doctor) {
+      setTimeSlotsFetched(doctor.timeSlots);
+    }
+  }, [doctor, timeSlotsFetched]);
+
+  // Defining the event handlers.
+  const handleTimeSlotChange = (event) => {
+    setSelectedTimeSlot(event.target.value);
+  };
+
+  // Defining the event handlers.
+  const handleModeChange = (event) => {
+    setCommunicationMode(event.target.value);
+  };
+
+  // Defining the handleSubmit function.
+  const handleSubmit = async () => {
+    // Add a booking slot. (Time Slot is captured but not used in the backend.)
+    try {
+      const res = await fetch(
+        `${BASE_URL}/bookings/slot/${doctor._id}/${communicationMode}`,
+        {
+          method: "post",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // Parse the JSON data.
+      const data = await res.json();
+      if (!res.ok) {
+        console.error(data.message);
+      }
+      toast.success(data.message);
+    } catch (err) {
+      console.log(err);
+      toast.error(err.message);
+      return;
+    }
+
+    // Initiate payment.
+    try {
+      // Make a POST request to the server.
+      const res = await fetch(
+        `${BASE_URL}/bookings/checkout-session/${doctor._id}`,
+        {
+          method: "post",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // Parse the JSON data.
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.message + " Please try again");
+      }
+      if (data.session.url) {
+        window.location.href = data.session.url;
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error(err.message);
+    }
+
+    // Close the modal.
+    setIsModalOpen(false);
+  };
 
   return (
     <section>
@@ -121,11 +199,74 @@ const DoctorDetails = () => {
             </div>
             <div>
               <SidePanel
+                setIsModalOpen={setIsModalOpen}
                 timeSlots={timeSlots}
                 doctorId={doctor._id}
                 ticketPrice={ticketPrice}
               />
             </div>
+            {isModalOpen && (
+              <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+                <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+                  <div className="mt-3 text-center">
+                    <h3 className="text-lg leading-6 font-medium text-gray-900">
+                      Select a Time Slot and Communication Mode
+                    </h3>
+                    <div className="mt-2 px-7 py-3">
+                      {timeSlotsFetched.map((slot, index) => (
+                        <div key={index} className="my-2">
+                          <label>
+                            <input
+                              type="radio"
+                              name="timeSlot"
+                              value={
+                                slot.startingTime + " to " + slot.endingTime
+                              }
+                              onChange={handleTimeSlotChange}
+                              checked={
+                                selectedTimeSlot ===
+                                slot.startingTime + " to " + slot.endingTime
+                              }
+                            />
+                            {slot.day}: {slot.startingTime} - {slot.endingTime}
+                          </label>
+                        </div>
+                      ))}
+                      <div className="my-4">
+                        <label className="inline-flex items-center">
+                          <input
+                            type="radio"
+                            name="communicationMode"
+                            value="Chat"
+                            onChange={handleModeChange}
+                            checked={communicationMode === "Chat"}
+                          />
+                          <span className="ml-2">Chat</span>
+                        </label>
+                        <label className="inline-flex items-center ml-6">
+                          <input
+                            type="radio"
+                            name="communicationMode"
+                            value="Video"
+                            onChange={handleModeChange}
+                            checked={communicationMode === "Video"}
+                          />
+                          <span className="ml-2">Video</span>
+                        </label>
+                      </div>
+                    </div>
+                    <div className="items-center px-4 py-3">
+                      <button
+                        className="btn px-4 py-2 text-white text-base font-medium rounded-md w-full shadow-sm"
+                        onClick={handleSubmit}
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>

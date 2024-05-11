@@ -3,38 +3,17 @@
  */
 
 // Import the required modules.
-import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 
 // Import the utility functions.
 import convertTime from "../../Utils/convertTime";
-import { BASE_URL, token } from "../../Utils/config";
 
 // Define the SidePanel component.
-const SidePanel = ({ timeSlots, doctorId, ticketPrice }) => {
+const SidePanel = ({ timeSlots, ticketPrice, setIsModalOpen }) => {
   // Define the bookingHandler function.
   const bookingHandler = async () => {
-    try {
-      // Make a POST request to the server.
-      const res = await fetch(
-        `${BASE_URL}/bookings/checkout-session/${doctorId}`,
-        {
-          method: "post",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.message + " Please try again");
-      }
-      if (data.session.url) {
-        window.location.href = data.session.url;
-      }
-    } catch (err) {
-      toast.error(err.message);
-    }
+    // Open the modal.
+    setIsModalOpen(true);
   };
   return (
     <div className="shadow-panelShadow p-3 lg:p-5 rounded-md pe-10">
@@ -76,6 +55,7 @@ SidePanel.propTypes = {
   timeSlots: PropTypes.array,
   doctorId: PropTypes.string,
   ticketPrice: PropTypes.number,
+  setIsModalOpen: PropTypes.func,
 };
 
 export default SidePanel;
