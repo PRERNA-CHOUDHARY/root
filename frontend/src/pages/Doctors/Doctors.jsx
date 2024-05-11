@@ -11,9 +11,9 @@ const Doctors = () => {
   const [query, setQuery] = useState("");
   const [debounceQuery, setDebounceQuery] = useState("");
   const handleSearch = () => {
-    setQuery(query.trim());
+    setQuery(query.trim())
     // {console.log(query)}
-    console.log("handle Search");
+    // console.log("handle Search");
     // console.log(useFetchData(`${BASE_URL}/doctors?query=${debounceQuery}`))
   };
   useEffect(() => {
@@ -30,7 +30,7 @@ const Doctors = () => {
   } = useFetchData(`${BASE_URL}/doctors?query=${debounceQuery}`);
   return (
     <>
-      {console.log(`yooo +${doctors}`)};
+      {/* {console.log(`yooo +${doctors}`)}; */}
       <section className="bg-fuchsia-100 mb-0 h-[10%] ">
         <div className="container md:mt-[-3rem] text-center ">
           <h2 className="heading"> Meet a Theripist </h2>
