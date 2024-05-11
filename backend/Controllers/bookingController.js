@@ -2,6 +2,7 @@
  * The booking controller has the following functions:
  *
  * getCheckoutSession: Get the checkout session.
+ * addBookingSlot: Add a booking slot.
  */
 
 // Get the stripe module.

@@ -2,6 +2,7 @@
  * @description: This file is used to define the routes for the booking.
  *
  * @api: /api/v1/booking/checkout-session/:doctorId
+ * @api: /api/v1/booking/slot/:doctorId/:mode
  */
 
 import express from "express";
