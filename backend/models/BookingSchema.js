@@ -1,5 +1,10 @@
+/**
+ * @description: This file defines the schema for the booking collection in the database.
+ */
+
 import mongoose from "mongoose";
 
+// Create the schema.
 const bookingSchema = new mongoose.Schema(
   {
     doctor: {
@@ -13,7 +18,7 @@ const bookingSchema = new mongoose.Schema(
       required: true,
     },
     ticketPrice: { type: String, required: true },
-    
+
     status: {
       type: String,
       enum: ["pending", "approved", "cancelled"],
@@ -26,8 +31,8 @@ const bookingSchema = new mongoose.Schema(
     mode: {
       type: String,
       enum: ["chat", "video"],
-      default:"chat"
-    }
+      default: "chat",
+    },
   },
   { timestamps: true }
 );

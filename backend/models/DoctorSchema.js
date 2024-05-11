@@ -1,5 +1,10 @@
+/**
+ * @description: This file defines the schema for the Doctor model.
+ */
+
 import mongoose from "mongoose";
 
+// Create the schema.
 const DoctorSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
@@ -10,12 +15,9 @@ const DoctorSchema = new mongoose.Schema({
   role: {
     type: String,
   },
-
-  // Fields for doctors only
-
   specialization: {
     type: String,
-    default: 'Therapist'
+    default: "Therapist",
   },
   qualifications: {
     type: Array,
@@ -24,8 +26,6 @@ const DoctorSchema = new mongoose.Schema({
   experiences: {
     type: Array,
   },
-  // ticketPrice: { type: String, required: true },
-
   bio: { type: String, maxLength: 50 },
   about: { type: String },
   timeSlots: { type: Array },

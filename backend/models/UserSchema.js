@@ -1,5 +1,10 @@
+/**
+ * @description: This file defines the schema for the users.
+ */
+
 import mongoose from "mongoose";
 
+// Create the schema.
 const UserSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },

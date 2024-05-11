@@ -1,3 +1,9 @@
+/**
+ * @description: This file is the entry point of the application. It is responsible for starting the server, connecting to the database, and setting up the middlewares.
+ * 
+ * @note: The server is started on port 8000 by .env.
+ */
+
 // Import modules.
 import express from "express";
 import cookieParser from "cookie-parser";
@@ -28,13 +34,11 @@ const corsOptions = {
 mongoose.set("strictQuery", false);
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    // Connect to the database.
+    await mongoose.connect(process.env.MONGO_URL);
     console.log("Connected to DB");
   } catch (err) {
-    console.log("Failed to connect to DB");
+    console.log(err);
   }
 };
 
