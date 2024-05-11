@@ -1,30 +1,43 @@
-import React, { useState } from "react";
+/**
+ * @description: This file contains the FeedbackForm component which is used to take feedback from the user.
+ */
+
+// Import the modules.
+import { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
-import { BASE_URL, token } from "../../Utils/config";
-import HashLoader from "react-spinners/HashLoader";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
+import HashLoader from "react-spinners/HashLoader";
+
+// Import the utility functions.
+import { BASE_URL, token } from "../../Utils/config";
+
+// Define the FeedbackForm component.
 const FeedbackForm = () => {
+  // Define the state variables.
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [reviewText, setReviewText] = useState("");
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
 
-  console.log(token);
+  // Define the function to handle form submission.
   const handleSubmitReview = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
+      // If the rating or review text is empty, then show an error message.
       if (!rating || !reviewText) {
         setLoading(false);
-       return  toast.error("Plese rate the Therapist");
+        return toast.error("Please rate the Therapist");
       }
+
+      // Make a POST request to the server.
       const res = await fetch(`${BASE_URL}/doctors/${id}/reviews`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
-          
+
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ rating, reviewText }),
@@ -86,11 +99,10 @@ const FeedbackForm = () => {
             rows="5"
             className="border border-solid rounded-md p-4 border-primaryColor focus:outline outline-primaryColor placeholder:text-pink-300 text-pinkColor font-[200]"
             placeholder="Write your feedback here."
-            onChange={e=> setReviewText(e.target.value)}
+            onChange={(e) => setReviewText(e.target.value)}
           ></textarea>
         </div>
         <button type="submit" onClick={handleSubmitReview} className="btn">
-         
           {loading ? <HashLoader size={25} color="#fff" /> : "Submit Feedback"}
         </button>
       </form>

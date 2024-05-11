@@ -1,5 +1,8 @@
-import React from "react";
+/**
+ * @file Contact page component for the application.
+ */
 
+// Contact page component.
 const Contact = () => {
   return (
     <section>
@@ -33,16 +36,14 @@ const Contact = () => {
           </div>
           <div className="sm:col-span-2">
             <label htmlFor="message" className="form__label">
-              Your messsage
+              Your message
             </label>
             <textarea
               type="text"
               id="message"
               cols={16}
               rows={3}
-              placeholder="
-            
-Leave a comment here...."
+              placeholder="Leave a comment here...."
               className="form__input border border-b-2  mt-1 "
             ></textarea>
           </div>

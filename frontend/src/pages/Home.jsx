@@ -1,22 +1,30 @@
-import React from "react";
+/**
+ * @description: Home page component displays the home page of the application.
+ */
+
+// Importing modules.
+import { Link } from "react-router-dom";
+import { BsArrowRight } from "react-icons/bs";
+
+// Importing images.
 import DocImg1 from "../assets/images/hero-img01.png";
 import DocImg2 from "../assets/images/hero-img02.png";
 import DocImg3 from "../assets/images/hero-img03.png";
 import icon1 from "../assets/images/icon01.png";
 import icon2 from "../assets/images/icon02.png";
 import icon3 from "../assets/images/icon03.png";
-import { Link } from "react-router-dom";
-import { BsArrowRight } from "react-icons/bs";
+
+// Importing components.
 import About from "../components/About/About";
 import ServiceList from "../components/Services/ServiceList";
+
+// Home component.
 const Home = () => {
   return (
     <>
-      {/* ==============first section======= */}
       <section className="hero__section pt-[60px] 2xl:h-[800px]  ">
         <div className="container">
           <div className="flex flex-col lg:flex-row gap-[90px] item-center justify-between ">
-            {/* ===========content=============== */}
             <div>
               <div className="lg:w-[570px] ">
                 <h1 className="text-[36px] leading-[46px]  text-headingColor font-[800] md:text-[50px] md:leading-[60px]">
@@ -28,11 +36,9 @@ const Home = () => {
                   a life filled with joy and serenity. Welcome to your journey
                   of empowerment!
                 </p>
-                <button className="btn"> Make an Apponintment</button>
+                <button className="btn"> Make an Appointment</button>
               </div>
-              {/* counter=================== */}
               <div className="mt-30px lg:mt-[70px] flex flex-row lg:flex-row lg:items-center gap-5 lg:lag-[30px] ">
-                {/* year of exp */}
                 <div>
                   <h2 className="text-[36px] leading-[56px] lg:text-[44px] lg:leading-[54px] font-[700] text-headingColor ">
                     5+
@@ -46,7 +52,7 @@ const Home = () => {
                     100+
                   </h2>
                   <span className="w-[80px] h-2 bg-yellow-600 rounded-full block mt-[-16px] "></span>
-                  <p className="text__para">Theripist</p>
+                  <p className="text__para">Therapist</p>
                 </div>
 
                 <div className="ms-[100px]">
@@ -58,8 +64,6 @@ const Home = () => {
                 </div>
               </div>
             </div>
-
-            {/* content================= */}
             <div className="flex gap-[30px] justify-end   ">
               <div>
                 <img className="w-full " src={DocImg1} alt="" />
@@ -72,7 +76,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-      {/* ==============first section ends============= */}
 
       <section>
         <div className="container">
@@ -94,7 +97,8 @@ const Home = () => {
                   Health Blogs
                 </h2>
                 <p className="text-textColor text-[16px] leading-7 font-[400] mt-4 text-center ">
-                Informative articles promoting wellness and health-related insights for readers.
+                  Informative articles promoting wellness and health-related
+                  insights for readers.
                 </p>
                 <Link
                   to="/doctors"
@@ -111,10 +115,11 @@ const Home = () => {
               </div>
               <div className="mt-[30px]">
                 <h2 className="text-[26px] leading-9 text-headingColor font-[700] text-center ">
-                  Meet a Theripist
+                  Meet a Therapist
                 </h2>
                 <p className="text-textColor text-[16px] leading-7 font-[400] mt-4 text-center ">
-                Encounter a compassionate guide for your emotional well-being journey.
+                  Encounter a compassionate guide for your emotional well-being
+                  journey.
                 </p>
                 <Link
                   to="/doctors"
@@ -131,7 +136,7 @@ const Home = () => {
               </div>
               <div className="mt-[30px]">
                 <h2 className="text-[26px] leading-9 text-headingColor font-[700] text-center ">
-                  Book Appontment
+                  Book Appointment
                 </h2>
                 <p className="text-textColor text-[16px] leading-7 font-[400] mt-4 text-center ">
                   Unparalleled support for all. Our psychological consultancy
@@ -148,11 +153,8 @@ const Home = () => {
           </div>
         </div>
       </section>
-
-      {/* ===========about section=============== */}
       <About />
 
-      {/* service section===================== */}
       <div className="container">
         <div className="xl:w-[470px] mx-auto ">
           <h2 className="heading text-center"> Our services</h2>
@@ -161,7 +163,7 @@ const Home = () => {
             world-class care tailored to your needs.
           </p>
         </div>
-        <ServiceList/>
+        <ServiceList />
       </div>
     </>
   );

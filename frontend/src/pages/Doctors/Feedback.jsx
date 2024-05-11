@@ -1,9 +1,19 @@
-import React, { useState} from "react";
+/**
+ * @description: This file contains the Feedback component which is used to display the feedbacks of the doctor.
+ */
+
+// Import the necessary modules.
+import { useState } from "react";
+import { AiFillStar } from "react-icons/ai";
+import PropTypes from "prop-types";
+
+// Import the utility functions.
 import { formatDate } from "../../Utils/formatDate";
-import { AiFillStar } from 'react-icons/ai';
 import FeedbackForm from "./FeedbackForm";
 
-const Feedback = ({reviews,totalRating}) => {
+// Define the Feedback component.
+const Feedback = ({ reviews, totalRating }) => {
+  // Define the state variables.
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
   return (
     <>
@@ -11,11 +21,9 @@ const Feedback = ({reviews,totalRating}) => {
         <h4 className="text-[20px] leading-[30px] font-[400] text-headingColor mb-[30px]">
           All reviews({totalRating})
         </h4>
-        
-        
-        {reviews.map((review,index)=>
-          { < div key={index} className="flex justify-between gap-10 mb-[30px]">
-            <div className="flex gabp-3">
+        {reviews.map((review, index) => {
+          <div key={index} className="flex justify-between gap-10 mb-[30px]">
+            <div className="flex gap-3">
               <figure className="w-10 h-10 rounded-full">
                 <img src={review?.user?.photo} alt="" />
               </figure>
@@ -33,18 +41,29 @@ const Feedback = ({reviews,totalRating}) => {
               </div>
             </div>
             <div className="flex gap-1">
-              {[...Array(review?.rating).keys()].map((_, index) => <AiFillStar key={index} color='#db2777' />)}
+              {[...Array(review?.rating).keys()].map((_, index) => (
+                <AiFillStar key={index} color="#db2777" />
+              ))}
             </div>
-          </div>})}
-        
+          </div>;
+        })}
       </div>
-      {!showFeedbackForm &&
+      {!showFeedbackForm && (
         <div className="text-center">
-          <button className="btn" onClick={() => setShowFeedbackForm(true)}> Give Feedback</button>
-        </div>}
-      {showFeedbackForm && <FeedbackForm/>}
+          <button className="btn" onClick={() => setShowFeedbackForm(true)}>
+            {" "}
+            Give Feedback
+          </button>
+        </div>
+      )}
+      {showFeedbackForm && <FeedbackForm />}
     </>
   );
+};
+
+Feedback.propTypes = {
+  reviews: PropTypes.array,
+  totalRating: PropTypes.number,
 };
 
 export default Feedback;
