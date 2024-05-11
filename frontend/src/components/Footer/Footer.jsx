@@ -1,6 +1,9 @@
-import React from "react";
+/**
+ * @file Footer.jsx is the footer component for the website.
+ */
+
+// Import necessary libraries.
 import { Link } from "react-router-dom";
-import logo from "../../assets/images/logo192.png";
 import { RiLinkedinFill } from "react-icons/ri";
 import {
   AiFillYoutube,
@@ -8,25 +11,38 @@ import {
   AiOutlineInstagram,
 } from "react-icons/ai";
 
+// Import the logo image.
+import logo from "../../assets/images/logo192.png";
+
+// Set the social links.
 const socialLinks = [
   {
     path: "https://www.youtube.com",
-    icon: <AiFillYoutube className="group-hover:text-fuchsia-900 w-4 h-5 text-white" />,
+    icon: (
+      <AiFillYoutube className="group-hover:text-fuchsia-900 w-4 h-5 text-white" />
+    ),
   },
   {
     path: "https://www.github.com",
-    icon: <AiFillGithub className="group-hover:text-fuchsia-900 w-4 h-5 text-white" />,
+    icon: (
+      <AiFillGithub className="group-hover:text-fuchsia-900 w-4 h-5 text-white" />
+    ),
   },
   {
     path: "https://www.instagram.com",
-    icon: <AiOutlineInstagram className="group-hover:text-fuchsia-900 text-white w-4 h-5" />,
+    icon: (
+      <AiOutlineInstagram className="group-hover:text-fuchsia-900 text-white w-4 h-5" />
+    ),
   },
   {
     path: "https://www.linkedin.com",
-    icon: <RiLinkedinFill className="group-hover:text-fuchsia-900 w-4 h-5 text-white" />,
+    icon: (
+      <RiLinkedinFill className="group-hover:text-fuchsia-900 w-4 h-5 text-white" />
+    ),
   },
 ];
 
+// Set the quick links.
 const quickLinks2 = [
   {
     path: "/contact",
@@ -37,6 +53,8 @@ const quickLinks2 = [
     display: "Donate",
   },
 ];
+
+// Set the quick links.
 const quickLinks1 = [
   {
     path: "/home",
@@ -55,7 +73,10 @@ const quickLinks1 = [
     display: "Set Appointment",
   },
 ];
+
+// Export the Footer component.
 export const Footer = () => {
+  // Get the current year.
   const year = new Date().getFullYear();
   return (
     <footer className="pb-16 pt-10 bg-fuchsia-900 mt-5">
@@ -95,8 +116,6 @@ export const Footer = () => {
               ))}
             </ul>
           </div>
-
-
           <div>
             <h2 className="text-[20px] leading-[30px] font-[700] mb-6 text-gray-300 ">
               Want to

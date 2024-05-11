@@ -1,8 +1,16 @@
-import React from "react";
+/**
+ * @fileoverview ServiceCard component. This component is used to display the services card on the home page.
+ */
+
+// Import the required modules.
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
+
+// Define the ServiceCard component.
 const ServiceCard = ({ item, index }) => {
-  const { name, desc, bgColor, textColor } = item;
+  // Destructure the item object.
+  const { name, desc, bgColor } = item;
   return (
     <div className="py-[30px] px-3 lg:px-5 bg-fuchsia-50 rounded-md">
       <h2 className="text-[26px]  leading-9 text-headingColor font-[700] ">
@@ -27,6 +35,11 @@ const ServiceCard = ({ item, index }) => {
       </div>
     </div>
   );
+};
+
+ServiceCard.propTypes = {
+  item: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default ServiceCard;

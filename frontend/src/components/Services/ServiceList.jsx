@@ -1,7 +1,14 @@
-import React from "react";
-import { services } from "./../../assets/data/services";
-import ServiceCard from "./ServiceCard";
+/**
+ * @desc  This is the Services List Component. This component is used to display the services list on the home page.
+ */
+
+// Import the required dependencies.
 import { Link } from "react-router-dom";
+
+// Importing the services data.
+import { services } from "./../../assets/data/services";
+
+// ServiceList Component.
 const ServiceList = () => {
   return (
     <>
@@ -38,9 +45,6 @@ const ServiceList = () => {
             {services[2].desc}
           </p>
         </div>
-        {/* {services.map((item, index) => (
-          <ServiceCard item={item} key={index} />
-        ))} */}
       </div>
       <Link to="/services" className="ms-[40%] md:ms-[50%] lg:ms-[45%]">
         <button className="btn">Explore More..</button>
