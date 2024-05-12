@@ -67,7 +67,19 @@ const Appointment = ({ appointments }) => {
                 )}
               </td>
               <td className="px-6 py-4">{formatDate(item?.createdAt)}</td>
-              <td className="px-6 py-4">{item?.mode}</td>
+              <td className="px-6 py-4">
+                <a
+                  href={
+                    item?.mode.toLowerCase() === "chat"
+                      ? "http://localhost:3000/chat"
+                      : "http://localhost:3000/video"
+                  }
+                  target="_black"
+                  rel="noreferrer noopener"
+                >
+                  {item?.mode}
+                </a>
+              </td>
             </tr>
           ))}
         </tbody>
