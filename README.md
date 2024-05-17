@@ -1,4 +1,4 @@
-# PCSE24-71
+![Screenshot (10)](https://github.com/PRERNA-CHOUDHARY/root/assets/74724592/4fd74b88-2330-4482-94a0-b52a17d82f6d)![Screenshot (18)](https://github.com/PRERNA-CHOUDHARY/root/assets/74724592/a214a5f7-5a66-4aaf-ab95-f6f9f9d155cc)# PCSE24-71
 # MedicWise
 
 ## Overview
@@ -53,29 +53,33 @@ The platform ensures a seamless experience for users and therapists:
 Sure, here are the steps to book an appointment on the MEDICWISE platform:
 
 1. **Login or Create an Account**: If you're a returning user, login to your MEDICWISE account. If you're new to the platform, create a new account by providing necessary details.
-![Screenshot (16)](https://github.com/cse-kiet/PCSE24-71/assets/163794362/04fc7050-0962-4506-9b5b-65e8713b3de7)
+
+![Screenshot (18)](https://github.com/PRERNA-CHOUDHARY/root/assets/74724592/82acad92-a6b3-42c9-a9a3-2440dc394e12)
+
+![Screenshot (30)](https://github.com/PRERNA-CHOUDHARY/root/assets/74724592/e0a51dee-e18a-4c43-b25c-e480c0855ed5)
 
 2. **Navigate to Appointment Booking Section**: Once logged in, navigate to the appointment booking section. This could be located on the dashboard or in a designated "Book Appointment" area.
-![Screenshot (10)](https://github.com/cse-kiet/PCSE24-71/assets/163794362/0b01dd0a-0df2-41a4-bae3-fda1a918e0a4)
+![Screenshot (10)](https://github.com/PRERNA-CHOUDHARY/root/assets/74724592/933c41ba-aa90-455b-bc39-134bc97d48b5)
 
 3. **Search for Healthcare Providers**: Browse or search for healthcare providers based on their name or specialization. This helps you find the right professional for your consultation needs.
-![Screenshot 2024-05-13 100032](https://github.com/cse-kiet/PCSE24-71/assets/163794362/8026cb2d-e2b0-4243-82b4-bf205f4ef551)
+![Screenshot (32)](https://github.com/PRERNA-CHOUDHARY/root/assets/74724592/80fbbfe9-2501-4f82-af0b-c7d20a14ed17)
+
 
 4. **Check Availability and Pricing**: View the availability and pricing details of the selected healthcare providers. This ensures that you can book an appointment at a convenient time and within your budget.
-![Screenshot (25)](https://github.com/cse-kiet/PCSE24-71/assets/163794362/4f6cfa14-8d24-499d-8086-4d145dff5390)
 
+![Screenshot (35)](https://github.com/PRERNA-CHOUDHARY/root/assets/74724592/d3f7fca4-98ed-487a-bbd1-b3e400ba1645)
 
 5. **Select Appointment Slot**: Choose a suitable time slot for your appointment from the available options provided by the healthcare provider.
 
 6. **Choose Communication Mode**: Select your preferred communication mode for the appointment. This could be via video call, chat, or any other specified method.
-![Screenshot (46)](https://github.com/cse-kiet/PCSE24-71/assets/163794362/a0061f40-647a-4c10-8d8d-74bc1b0e3c88)
+
+![Screenshot (46)](https://github.com/PRERNA-CHOUDHARY/root/assets/74724592/fc524d7f-10f1-4371-9626-59059a3f8fff)
 
 7. **Confirm Appointment Details**: Review the appointment details including the date, time, communication mode, and any other relevant information.
 
 8. **Proceed to Payment**: If there are any fees associated with the appointment, proceed to the payment section. Here, you can securely complete the transaction using the integrated payment gateway.
+![Screenshot (43)_LI](https://github.com/PRERNA-CHOUDHARY/root/assets/74724592/df7e2975-dfea-4498-9ee0-1f044eadc846)
 
 9. **Confirmation**: Once the payment is successful, you'll receive a confirmation of your appointment booking. This confirmation will include details such as appointment time, communication mode, and any other relevant instructions.
-![Screenshot (43)_LI](https://github.com/cse-kiet/PCSE24-71/assets/163794362/b67550ae-773d-4273-9563-6de2dd7a63d0)
-
 10. **Prepare for Appointment**: Before the scheduled appointment time, make sure you're prepared and have any necessary documents or information ready for the consultation.
 
